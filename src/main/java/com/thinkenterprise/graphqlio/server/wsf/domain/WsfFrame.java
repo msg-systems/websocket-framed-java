@@ -116,6 +116,10 @@ public final class WsfFrame {
 
 
 	}
-	
+
+	@Override
+	public String toString() {
+		return "WsfFrame [fid=" + fid + ", rid=" + rid + ", type=" + type + ", data=" + data + "]";
+	}
 
 }

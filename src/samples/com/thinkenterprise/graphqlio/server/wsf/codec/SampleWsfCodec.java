@@ -28,6 +28,9 @@ package com.thinkenterprise.graphqlio.server.wsf.codec;
 
 import java.util.Arrays;
 
+import com.thinkenterprise.graphqlio.server.wsf.codec.WsfCBORCodec;
+import com.thinkenterprise.graphqlio.server.wsf.codec.WsfCodec;
+
 /**
  * Sample Class for showing codec using
  *
