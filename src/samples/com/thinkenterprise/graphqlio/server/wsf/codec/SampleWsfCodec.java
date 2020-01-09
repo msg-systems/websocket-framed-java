@@ -28,9 +28,6 @@ package com.thinkenterprise.graphqlio.server.wsf.codec;
 
 import java.util.Arrays;
 
-import com.thinkenterprise.graphqlio.server.wsf.codec.WsfCBORCodec;
-import com.thinkenterprise.graphqlio.server.wsf.codec.WsfCodec;
-
 /**
  * Sample Class for showing codec using
  *
@@ -43,8 +40,13 @@ public class SampleWsfCodec {
 	public static void main(String[] args) throws Exception {
 		String data = "this text is for excryption and decryption";
 
+		// using CBOR codec; MsgPack analogue
 		WsfCodec codec = new WsfCBORCodec();
+
+		// encode / decode
 		byte[] bytes = codec.encode(data);
+
+		// result is same like data input
 		String result = codec.decode(bytes);
 
 		System.out.println("data   = " + data);
