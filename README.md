@@ -8,6 +8,29 @@ About
 This is a small Java library for Java
 to encode/decode WebSocket messages to/from a wrapping "frame" data structure.
 
+Usage of converter
+------------------
+
+```java
+		// build frame input
+		WsfFrame frame_input = WsfFrame.builder().fid("fid").rid("123").type(WsfFrameType.GRAPHQLREQUEST).data("data").build();
+		// create converter
+		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		// convert from WsfFrame to String
+		String result = conv.convert(frame_input);
+		// convert from String to WsfFrame
+		WsfFrame frame_output = conv.convert(result);
+```
+
+Usage of codecs
+---------------
+
+```java
+		WsfCodec codec = new WsfCBORCodec();
+		byte[] bytes = codec.encode(data);
+		String result = codec.decode(bytes);
+```
+
 Frame Format
 ------------
 
