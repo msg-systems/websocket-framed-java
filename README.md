@@ -1,8 +1,5 @@
 # websocket-framed-java
 
-WebSocket Framed
-================
-
 Framed WebSocket Communication for Java.
 
 About
