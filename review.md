@@ -10,7 +10,8 @@
 2. Do we need WsfInboundFrameEvent WsfOubboundFrameEvent? I think no!! 
 ```
 -> used in:
-public class GsWebSocketHandler extends AbstractWebSocketHandler implements ApplicationListener<WsfInboundFrameEvent>, SubProtocolCapable
+public class GsWebSocketHandler extends AbstractWebSocketHandler 
+implements ApplicationListener<WsfInboundFrameEvent>, SubProtocolCapable
 -> method:
 public void onApplicationEvent(WsfInboundFrameEvent event)
 -> i don't know if it is used when running (tku)
