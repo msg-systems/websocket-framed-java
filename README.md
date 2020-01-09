@@ -26,8 +26,11 @@ Usage of codecs
 ---------------
 
 ```java
+		// create CBOR codec; MsgPack analogue
 		WsfCodec codec = new WsfCBORCodec();
+		// encode from String to byte array
 		byte[] bytes = codec.encode(data);
+		// decode from byte array to String
 		String result = codec.decode(bytes);
 ```
 
