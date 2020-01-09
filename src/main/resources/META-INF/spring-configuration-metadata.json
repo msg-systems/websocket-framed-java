@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "graphqlio.websocketframed",
+      "type": "com.thinkenterprise.graphqlio.server.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration",
+      "sourceType": "com.thinkenterprise.graphqlio.server.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration"
+    },
+    {
+      "name": "graphqlio.websocketframed",
+      "type": "com.thinkenterprise.graphqlio.server.wsf.autoconfiguration.WsfWebSocketFramedProperties",
+      "sourceType": "com.thinkenterprise.graphqlio.server.wsf.autoconfiguration.WsfWebSocketFramedProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
