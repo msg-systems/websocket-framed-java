@@ -29,6 +29,12 @@ src/samples/
 ```
 7. Delete Autoconfiguration
 8. Converters. Why do we have 2 Converter Interfaces an only one implementation 
+```
+-> both interfaces only used here (tku):
+public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFrameConverter
+-> no other references in code.
+-> delete both interfaces?
+```
 9. Shot we provide a Util Calss for createData(Set<String> set) in the FrameConverter?
 10. Make it to a pure Java - Only Object Mapper comes from spring-boot-starter-json!!
 
