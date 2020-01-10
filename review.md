@@ -22,6 +22,9 @@ public void onApplicationEvent(WsfInboundFrameEvent event)
 -> done! (tku)
 ```
 5. Change the Package Desciption To Base Package com.thinkenterprise.wsf
+```
+-> done! (tku)
+```
 6. A simple Sample is missing
 ```
 -> started in code (tku):
