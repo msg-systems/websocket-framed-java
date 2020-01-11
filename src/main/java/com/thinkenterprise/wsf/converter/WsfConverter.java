@@ -96,6 +96,18 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		// Delete excape characters for double quotas 
 		// ToDo: not 2 insted 3 or?
 		messageValues[2] = StringUtils.deleteAny(messageValues[2], "\"");
+		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\"");
+		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\\n");
+		messageValues[3] = StringUtils.delete(messageValues[3], "\n");
+		messageValues[3] = StringUtils.replace(messageValues[3], "query:", "query ");
+		
+		if (messageValues[3].length() > 2) {
+			int len = messageValues[3].length();
+			String dataMessage = messageValues[3];
+			if (dataMessage.charAt(0) == '{'  &&  dataMessage.charAt(len-1) == '}') {
+				messageValues[3] = dataMessage.substring(1,len-1);
+			}
+		}
 
 		// Actually we only convert the GRAPHQLREQUEST frame type  
 		WsfFrameType graphQLIOMessageType = WsfFrameType
