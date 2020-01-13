@@ -1,8 +1,0 @@
-com\thinkenterprise\wsf\codec\TestWsfCBORCodec.class
-com\thinkenterprise\wsf\event\TestWsfInboundFrameEvent.class
-com\thinkenterprise\wsf\codec\TestWsfMsgPackCodec.class
-com\thinkenterprise\wsf\converter\TestWsfConverter.class
-com\thinkenterprise\wsf\domain\TestWsfFrame.class
-com\thinkenterprise\wsf\event\TestWsfOutboundFrameEvent.class
-com\thinkenterprise\wsf\GraphQlIoApplicationTests.class
-com\thinkenterprise\wsf\TestApplication.class
