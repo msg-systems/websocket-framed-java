@@ -1,54 +1,64 @@
-# websocket-framed-java
+# About
+websocket-framed-java is the **Java** implementation of the **JavaScript** websocket-framed reference implementation. 
+The documentation of the reference implementation can be found at (https://github.com/rse/websocket-framed). 
 
-Framed WebSocket Communication for Java.
-
-About
------
-
-This is a small Java library for Java
-to encode/decode WebSocket messages to/from a wrapping "frame" data structure.
-
-Usage of converter
-------------------
-
-```java
-		// build frame input
-		WsfFrame frame_input = WsfFrame.builder().fid("fid").rid("123").type(WsfFrameType.GRAPHQLREQUEST).data("data").build();
-		// create converter
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
-		// convert from WsfFrame to String
-		String result = conv.convert(frame_input);
-		// convert from String to WsfFrame
-		WsfFrame frame_output = conv.convert(result);
-```
-
-Usage of codecs
----------------
-
-```java
-		// create CBOR codec; MsgPack analogue
-		WsfCodec codec = new WsfCBORCodec();
-		// encode from String to byte array
-		byte[] bytes = codec.encode(data);
-		// decode from byte array to String
-		String result = codec.decode(bytes);
-```
-
-Frame Format
-------------
+# Installation
+## Maven 
 
 ```
-Frame: [ fid: number, rid: number, type: string, data: any ]
-
-+--------+--------+--------+--------+
-|  fid   |  rid   |  type  |  data  |
-+--------+--------+--------+--------+
+mvn clean install
 ```
 
-- The `fid` is the frame id, a numeric unique id between 0 and 2^32 the sending side manages per connection.
+## Gradle 
 
-- The `rid` is the reply id, the frame id of a previously received frame the current sent frame references.
+FIXME
 
-- The `type` is the frame type, a string identifying the type of `data`.
+# Usage 
 
-- The `data` is the arbitrary data structure send in the frame. Any JSON is valid here.
+## Maven 
+```
+<dependency>
+	<groupId>com.thinkenterprise</groupId>
+	<artifactId>websocket-framed-java</artifactId>
+	<version>0.0.9</version>
+</dependency>
+
+```
+
+## Gradle 
+
+```
+dependencies {
+  compile 'com.thinkenterprise:websocket-framed-java:0.0.9'
+}
+```
+
+
+# Sample 
+FIXME
+
+
+
+# License 
+Design and Development by msg Applied Technology Research
+Copyright (c) 2019-2020 msg systems ag (http://www.msg-systems.com/)
+All Rights Reserved.
+ 
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+ 
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 

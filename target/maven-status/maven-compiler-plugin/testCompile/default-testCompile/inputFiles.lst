@@ -1,0 +1,8 @@
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\GraphQlIoApplicationTests.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\TestApplication.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\codec\TestWsfMsgPackCodec.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\event\TestWsfInboundFrameEvent.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\domain\TestWsfFrame.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\event\TestWsfOutboundFrameEvent.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\converter\TestWsfConverter.java
+C:\environment\source\graphql-io-server\websocket-framed-java\src\test\java\com\thinkenterprise\wsf\codec\TestWsfCBORCodec.java
