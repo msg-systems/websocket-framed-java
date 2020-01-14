@@ -26,6 +26,7 @@
  ******************************************************************************/
 package com.thinkenterprise.wsf.converter;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -89,6 +90,8 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		// Tokenize String 
 		String[] messageValues = StringUtils.tokenizeToStringArray(frame, ",");
 
+		logger.info("messageValues (a) = " + Arrays.toString(messageValues));
+
 		// Check count of values 
 		if (messageValues.length != 4)
 			throw new WsfException();
@@ -100,7 +103,9 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\r\n");
 		messageValues[3] = StringUtils.delete(messageValues[3], "\n");
 		messageValues[3] = StringUtils.replace(messageValues[3], "query:", "query ");
-		
+
+		logger.info("messageValues (b) = " + Arrays.toString(messageValues));
+
 		if (messageValues[3].length() > 2) {
 			int len = messageValues[3].length();
 			String dataMessage = messageValues[3];
@@ -108,6 +113,7 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 				messageValues[3] = dataMessage.substring(1,len-1);
 			}
 		}
+		logger.info("messageValues (c) = " + Arrays.toString(messageValues));
 
 		// Actually we only convert the GRAPHQLREQUEST frame type  
 		WsfFrameType graphQLIOMessageType = WsfFrameType
