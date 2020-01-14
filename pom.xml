@@ -5,7 +5,7 @@
 	
 	<groupId>com.thinkenterprise</groupId>
 	<artifactId>websocket-framed-java</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.9</version>
 	<name>WebSocket Framed</name>
 	<description>WebSocket Framed</description>
 
