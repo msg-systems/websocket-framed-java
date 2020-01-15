@@ -30,10 +30,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * Class for library module configuration
+ * Class to provide graphqlio.server Configuration properties
  *
  * @author Michael Schäfer
- * @author Dr. Edgar Müller
  */
 
 @EnableConfigurationProperties

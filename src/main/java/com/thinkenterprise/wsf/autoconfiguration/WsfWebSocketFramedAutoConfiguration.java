@@ -32,7 +32,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Class for library module configuration
+ * Class used propagate types in a graphql io server environment
  *
  * @author Michael Schäfer
  * @author Dr. Edgar Müller
