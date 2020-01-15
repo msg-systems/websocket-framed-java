@@ -101,7 +101,7 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		messageValues[2] = StringUtils.deleteAny(messageValues[2], "\"");
 		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\"");
 		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\r\n");
-		messageValues[3] = StringUtils.delete(messageValues[3], "\n");
+		messageValues[3] = StringUtils.delete(messageValues[3], "\\n");
 		messageValues[3] = StringUtils.replace(messageValues[3], "query:", "query ");
 
 		logger.info("messageValues (b) = " + Arrays.toString(messageValues));
