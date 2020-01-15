@@ -31,6 +31,7 @@ package com.thinkenterprise.wsf.domain;
  *
  * @author Michael Schäfer
  * @author Dr. Edgar Müller
+ * @author Torsten Kühnert
  */
 
 public enum WsfFrameType {
@@ -49,7 +50,7 @@ public enum WsfFrameType {
     GRAPHQLNOTIFIER {
         @Override
         public String toString() {
-            return "GRAPHQL-NOTIFIER";
+            return "GRAPHQL-NOTIFY";
         }
     }
     
