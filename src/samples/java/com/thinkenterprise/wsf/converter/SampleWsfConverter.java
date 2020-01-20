@@ -9,7 +9,7 @@ public class SampleWsfConverter {
 		String fid = "fid";
 		String rid = "123987";
 		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
-		String data = "data";
+		String data = "{\"query\": \"{data}\"}";
 
 		// build frame input
 		WsfFrame frame_input = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
