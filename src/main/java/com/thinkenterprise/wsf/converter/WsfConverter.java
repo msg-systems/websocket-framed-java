@@ -31,7 +31,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import com.thinkenterprise.wsf.domain.WsfFrame;
 import com.thinkenterprise.wsf.domain.WsfFrameType;
@@ -42,6 +44,7 @@ import com.thinkenterprise.wsf.exception.WsfException;
  *
  * @author Michael Schäfer
  * @author Dr. Edgar Müller
+ * @author Torsten Kühnert
  */
 
 public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFrameConverter {
@@ -83,53 +86,66 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		WsfFrameType type;
 		String data;
 
-		// Delete not nedded characters 
-		frame = StringUtils.deleteAny(frame, "[");
-		frame = StringUtils.deleteAny(frame, "]");
+		// Actually we only convert the GRAPHQLREQUEST frame type
+		WsfFrameType graphQLIOMessageType = WsfFrameType.valueOf(frameType.name());
 
-		// Tokenize String 
-		String[] messageValues = StringUtils.tokenizeToStringArray(frame, ",");
+		JSONArray arr = null;
+		try {
+			arr = new JSONArray(frame);
+			logger.info("arr = " + arr);
 
-		logger.info("messageValues (a) = " + Arrays.toString(messageValues));
+		} catch (JSONException e) {
+			throw new WsfException();
+		}
 
-		// Check count of values 
-		if (messageValues.length != 4)
+		logger.info("arr.length = " + arr.length());
+		if (arr.length() < 4) {
 			throw new WsfException();
 
-		// Delete excape characters for double quotas 
-		// ToDo: not 2 insted 3 or?
-		messageValues[2] = StringUtils.deleteAny(messageValues[2], "\"");
-		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\"");
-		messageValues[3] = StringUtils.deleteAny(messageValues[3], "\r\n");
-		messageValues[3] = StringUtils.delete(messageValues[3], "\\n");
-		messageValues[3] = StringUtils.replace(messageValues[3], "query:", "query ");
+		} else {
+			try {
+				fid = arr.getString(0);
+				logger.info("fid = " + fid);
 
-		logger.info("messageValues (b) = " + Arrays.toString(messageValues));
+			} catch (JSONException e) {
+				throw new WsfException();
+			}
+			try {
+				arr.getInt(1);
+				// keine Exception? dann �bernehmen:
+				rid = arr.getString(1);
+				logger.info("rid = " + rid);
 
-		if (messageValues[3].length() > 2) {
-			int len = messageValues[3].length();
-			String dataMessage = messageValues[3];
-			if (dataMessage.charAt(0) == '{'  &&  dataMessage.charAt(len-1) == '}') {
-				messageValues[3] = dataMessage.substring(1,len-1);
+			} catch (JSONException e) {
+				throw new WsfException();
+			}
+			try {
+				if (!arr.getString(2).equals(graphQLIOMessageType.toString())) {
+					throw new WsfException();
+				}
+
+			} catch (JSONException e) {
+				throw new WsfException();
+			}
+			type = graphQLIOMessageType;
+			logger.info("type = " + type);
+			try {
+				JSONObject obj = new JSONObject(arr.getString(3));
+				// keine Exception? dann weiter:
+				if (obj.has("query")) {
+					data = obj.getString("query");
+					logger.info("data = " + data);
+
+				} else {
+					throw new WsfException();
+				}
+
+			} catch (JSONException e) {
+				throw new WsfException();
 			}
 		}
-		logger.info("messageValues (c) = " + Arrays.toString(messageValues));
 
-		// Actually we only convert the GRAPHQLREQUEST frame type  
-		WsfFrameType graphQLIOMessageType = WsfFrameType
-				.valueOf(frameType.name());
-
-		// Check the right frame type 
-		if (!messageValues[2].equals(graphQLIOMessageType.toString()))
-			throw new WsfException();
-
-		// Set local variables more readable 
-		fid=messageValues[0];
-		rid=messageValues[1];
-		type=graphQLIOMessageType;
-		data=messageValues[3];
-
-		// Build Message  
+		// Build Message
 		return  WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 	}
 

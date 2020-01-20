@@ -24,56 +24,19 @@
  * **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * *
  ******************************************************************************/
-package com.thinkenterprise.wsf.converter;
+package com.thinkenterprise.wsf.autoconfiguration;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import com.thinkenterprise.wsf.converter.WsfConverter;
-import com.thinkenterprise.wsf.domain.WsfFrame;
-import com.thinkenterprise.wsf.domain.WsfFrameType;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * Class for testing graphqlio class WsfConverter
+ * Class to provide graphqlio.server Configuration properties
  *
- * @author Michael Schäfer
- * @author Torsten Kühnert
+ * @author Michael Sch�fer
  */
 
-public class TestWsfConverter {
-
-	@Test
-	public void testWsfConverter_1() {
-		String fid = "fid";
-		String rid = "123987";
-		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
-		String data = "data";
-
-		WsfFrame frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
-
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
-		String result = conv.convert(frame);
-
-		String expected = "[fid,123987,\"GRAPHQL-REQUEST\",data]";
-		Assertions.assertTrue(result.equals(expected));
-	}
-
-	@Test
-	public void testWsfConverter_2() {
-		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
-
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLRESPONSE);
-		WsfFrame result = conv.convert(input);
-
-		String fid = "fid";
-		String rid = "123987";
-		WsfFrameType type = WsfFrameType.GRAPHQLRESPONSE;
-		String data = "data";
-
-		Assertions.assertTrue(result.getFid().equals(fid));
-		Assertions.assertTrue(result.getRid().equals(rid));
-		Assertions.assertTrue(result.getType().equals(type));
-		Assertions.assertTrue(result.getData().equals(data));
-	}
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "graphqlio.websocketframed")
+public class WsfWebSocketFramedProperties {
 
 }

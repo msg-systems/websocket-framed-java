@@ -24,56 +24,26 @@
  * **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * *
  ******************************************************************************/
-package com.thinkenterprise.wsf.converter;
+package com.thinkenterprise.wsf.autoconfiguration;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import com.thinkenterprise.wsf.converter.WsfConverter;
-import com.thinkenterprise.wsf.domain.WsfFrame;
-import com.thinkenterprise.wsf.domain.WsfFrameType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * Class for testing graphqlio class WsfConverter
+ * Class used propagate types in a graphql io server environment
  *
- * @author Michael SchÃ¤fer
- * @author Torsten KÃ¼hnert
+ * @author Michael Schäfer
+ * @author Dr. Edgar Müller
  */
 
-public class TestWsfConverter {
+@Configuration
+@EnableConfigurationProperties(WsfWebSocketFramedProperties.class)
+@ConfigurationProperties(prefix = "graphqlio.websocketframed")
+public class WsfWebSocketFramedAutoConfiguration {
 
-	@Test
-	public void testWsfConverter_1() {
-		String fid = "fid";
-		String rid = "123987";
-		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
-		String data = "data";
-
-		WsfFrame frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
-
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
-		String result = conv.convert(frame);
-
-		String expected = "[fid,123987,\"GRAPHQL-REQUEST\",data]";
-		Assertions.assertTrue(result.equals(expected));
-	}
-
-	@Test
-	public void testWsfConverter_2() {
-		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
-
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLRESPONSE);
-		WsfFrame result = conv.convert(input);
-
-		String fid = "fid";
-		String rid = "123987";
-		WsfFrameType type = WsfFrameType.GRAPHQLRESPONSE;
-		String data = "data";
-
-		Assertions.assertTrue(result.getFid().equals(fid));
-		Assertions.assertTrue(result.getRid().equals(rid));
-		Assertions.assertTrue(result.getType().equals(type));
-		Assertions.assertTrue(result.getData().equals(data));
-	}
+	@Autowired
+	private WsfWebSocketFramedProperties properties;
 
 }
