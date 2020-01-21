@@ -50,3 +50,6 @@ POM ->  JUNIT5 from JUNIT 5 Libs
 
 GraphQlIoApplicationTests.java	sollen raus
 TestApplication.java sollen raus 
+```
+done! (tku)
+```
