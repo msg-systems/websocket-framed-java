@@ -4,16 +4,12 @@
 2. Do we need WsfInboundFrameEvent? (I)
 Please delete!! Check before ... 
 ```
--> used in:
-public class GsWebSocketHandler extends AbstractWebSocketHandler 
-implements ApplicationListener<WsfInboundFrameEvent>, SubProtocolCapable
--> method:
-public void onApplicationEvent(WsfInboundFrameEvent event)
--> i don't know if it is used when running (tku)
+done! (tku)
 ```
 3. Then we could Delete The Inbound Tests!? (I) 
-Please Delete!! Check before ... 
-
+```
+done! (tku)
+```
 7. Delete Autoconfiguration (II) - Edgar 
 8. Converters. Why do we have 2 Converter Interfaces an only one implementation
 
