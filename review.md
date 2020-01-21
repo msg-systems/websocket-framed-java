@@ -37,6 +37,7 @@ POM ->  ObjectMapper from Jackson ...
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-json</artifactId>
 </dependency>
+
 ```
 done! (tku)
 ```
@@ -53,6 +54,7 @@ POM ->  JUNIT5 from JUNIT 5 Libs
 
 GraphQlIoApplicationTests.java	sollen raus
 TestApplication.java sollen raus 
+
 ```
 done! (tku)
 ```
