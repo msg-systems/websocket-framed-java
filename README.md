@@ -61,7 +61,7 @@ Working with frames
 Working with converter
 
 ``` java
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
 		String string_from_frame = conv.convert(input_frame);
 ```
 

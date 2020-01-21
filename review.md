@@ -21,7 +21,11 @@ done! (tku)
 done! (tku)
 ```
 8.3 Wenn ein new ... WsfConverter und setter/getter bereitstellen 
-
+```
+done!
+with 3 beans in GsAutoConfiguration (sorry!)
+and constructor parameter in GsWebSocketHandler (tku)
+```
 9. Shot we provide a Util Calss for createData(Set<String> set) in the FrameConverter? (II)
 ```
 done, but no util class: method in GsWebSocketHandler (tku)
