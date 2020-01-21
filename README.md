@@ -35,8 +35,33 @@ dependencies {
 
 
 # Sample 
-FIXME
 
+Working with codecs
+
+``` java
+		WsfCodec codec = new WsfCBORCodec();
+		byte[] bytes = codec.encode(data);
+		String str = codec.decode(bytes);
+		// bytes equals str == true
+```
+
+Working with frames
+
+``` java
+		String fid = "fid";
+		String rid = "123987";
+		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
+		String data = "{\"query\": \"{data}\"}";
+
+		WsfFrame input_frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
+```
+
+Working with converter
+
+``` java
+		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		String string_from_frame = conv.convert(input_frame);
+```
 
 
 # License 

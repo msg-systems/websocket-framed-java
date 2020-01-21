@@ -27,8 +27,7 @@ public void onApplicationEvent(WsfInboundFrameEvent event)
 ```
 6. A simple Sample is missing
 ```
--> started in code (tku):
-src/samples/
+-> done! (tku)
 ```
 7. Delete Autoconfiguration
 8. Converters. Why do we have 2 Converter Interfaces an only one implementation 
