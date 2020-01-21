@@ -24,9 +24,12 @@
  * **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * *
  ******************************************************************************/
-package com.thinkenterprise.wsf.codec;
+package com.thinkenterprise.wsf.samples.codec;
 
 import java.util.Arrays;
+
+import com.thinkenterprise.wsf.codec.WsfCBORCodec;
+import com.thinkenterprise.wsf.codec.WsfCodec;
 
 /**
  * Sample Class for showing codec using

@@ -1,5 +1,6 @@
-package com.thinkenterprise.wsf.converter;
+package com.thinkenterprise.wsf.samples.converter;
 
+import com.thinkenterprise.wsf.converter.WsfConverter;
 import com.thinkenterprise.wsf.domain.WsfFrame;
 import com.thinkenterprise.wsf.domain.WsfFrameType;
 
