@@ -12,17 +12,20 @@ done! (tku)
 ```
 7. Delete Autoconfiguration (II) - Edgar 
 8. Converters. Why do we have 2 Converter Interfaces an only one implementation
-
 8.1 Bitte Interfaces zusammenführen XXX unter einem (I)
-8.2 Bitte Interface XXX auch verwenden ... 
-8.3 Wenn ein new ... WsfConverter und setter/getter bereitstellen 
-``` 
--> both interfaces only used here (tku):
-public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFrameConverter
--> no other references in code.
--> delete both interfaces?
 ```
+done! (tku)
+```
+8.2 Bitte Interface XXX auch verwenden ... 
+```
+done! (tku)
+```
+8.3 Wenn ein new ... WsfConverter und setter/getter bereitstellen 
+
 9. Shot we provide a Util Calss for createData(Set<String> set) in the FrameConverter? (II)
+```
+done, but no util class: method in GsWebSocketHandler (tku)
+```
 10. Make it to a pure Java - Only Object Mapper comes from spring-boot-starter-json!! will be used (III)
 POM ->  ObjectMapper from Jackson ... 
 

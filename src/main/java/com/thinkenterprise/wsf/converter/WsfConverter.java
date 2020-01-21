@@ -26,7 +26,6 @@
  ******************************************************************************/
 package com.thinkenterprise.wsf.converter;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -47,7 +46,7 @@ import com.thinkenterprise.wsf.exception.WsfException;
  * @author Torsten Kühnert
  */
 
-public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFrameConverter {
+public class WsfConverter implements WsfFrameToMessageConverter {
 
 	private final Logger logger = LoggerFactory.getLogger(WsfConverter.class);
 	
@@ -149,17 +148,4 @@ public class WsfConverter implements WsfFrameToMessageConverter, WsfMessageToFra
 		return  WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 	}
 
-	private String surroundWithQuotes(String value) {
-		return "\"" + value + "\"";
-	}
-
-	public String createData(Set<String> set) {
-        // ToDo : Build Response Data with JSON - JSON-field: data, JSON-Data: Array of sids 
-        // "data":["5c989173-0eed-55b6-8f48-44890f621aaa"]		
-
-		String result = set.isEmpty() ? "" : surroundWithQuotes(String.join(surroundWithQuotes(", "), set));
-		return "{" + surroundWithQuotes("data") + ":[" +  result + "]}";
-	}
-	
-	
 }

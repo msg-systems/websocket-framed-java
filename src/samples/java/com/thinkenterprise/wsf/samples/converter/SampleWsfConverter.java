@@ -1,6 +1,7 @@
 package com.thinkenterprise.wsf.samples.converter;
 
 import com.thinkenterprise.wsf.converter.WsfConverter;
+import com.thinkenterprise.wsf.converter.WsfFrameToMessageConverter;
 import com.thinkenterprise.wsf.domain.WsfFrame;
 import com.thinkenterprise.wsf.domain.WsfFrameType;
 
@@ -17,7 +18,7 @@ public class SampleWsfConverter {
 		System.out.println("frame_input = " + frame_input);
 
 		// create converter
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
 
 		// convert from WsfFrame to String
 		String result = conv.convert(frame_input);

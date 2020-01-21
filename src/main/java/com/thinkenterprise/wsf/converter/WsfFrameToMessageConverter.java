@@ -33,10 +33,13 @@ import com.thinkenterprise.wsf.domain.WsfFrame;
  *
  * @author Michael Schäfer
  * @author Dr. Edgar Müller
+ * @author Torsten Kühnert
  */
 
 public interface WsfFrameToMessageConverter {
-	
+
 	WsfFrame convert(String frame);
+
+	String convert(WsfFrame message);
 
 }

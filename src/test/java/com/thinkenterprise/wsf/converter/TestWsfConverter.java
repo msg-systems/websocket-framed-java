@@ -29,7 +29,6 @@ package com.thinkenterprise.wsf.converter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.thinkenterprise.wsf.converter.WsfConverter;
 import com.thinkenterprise.wsf.domain.WsfFrame;
 import com.thinkenterprise.wsf.domain.WsfFrameType;
 
@@ -51,7 +50,7 @@ public class TestWsfConverter {
 
 		WsfFrame frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
 		String result = conv.convert(frame);
 
 		String expected = "[fid,123987,\"GRAPHQL-REQUEST\",data]";
@@ -62,7 +61,7 @@ public class TestWsfConverter {
 	public void testWsfConverter_2() {
 		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
 
-		WsfConverter conv = new WsfConverter(WsfFrameType.GRAPHQLRESPONSE);
+		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLRESPONSE);
 		WsfFrame result = conv.convert(input);
 
 		String fid = "fid";
