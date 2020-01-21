@@ -39,10 +39,12 @@ dependencies {
 Working with codecs
 
 ``` java
+		String data = "this text is for excryption and decryption";
+
 		WsfCodec codec = new WsfCBORCodec();
 		byte[] bytes = codec.encode(data);
 		String str = codec.decode(bytes);
-		// bytes equals str == true
+		// data equals str == true
 ```
 
 Working with frames
