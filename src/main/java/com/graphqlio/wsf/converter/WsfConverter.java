@@ -26,8 +26,6 @@
  ******************************************************************************/
 package com.graphqlio.wsf.converter;
 
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -46,14 +44,14 @@ import com.graphqlio.wsf.exception.WsfException;
  * @author Torsten Kühnert
  */
 
-public class WsfConverter implements WsfFrameToMessageConverter {
+public abstract class WsfConverter implements WsfFrameToMessageConverter {
 
 	private final Logger logger = LoggerFactory.getLogger(WsfConverter.class);
 	
 	
 	private WsfFrameType frameType;	
 
-	public WsfConverter(WsfFrameType frameType) {
+	protected WsfConverter(WsfFrameType frameType) {
 		this.frameType = frameType;
 	}
 	

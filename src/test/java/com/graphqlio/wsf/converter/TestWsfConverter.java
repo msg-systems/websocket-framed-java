@@ -29,8 +29,6 @@ package com.graphqlio.wsf.converter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.graphqlio.wsf.converter.WsfConverter;
-import com.graphqlio.wsf.converter.WsfFrameToMessageConverter;
 import com.graphqlio.wsf.domain.WsfFrame;
 import com.graphqlio.wsf.domain.WsfFrameType;
 
@@ -52,7 +50,7 @@ public class TestWsfConverter {
 
 		WsfFrame frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 
-		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLREQUEST);
+		WsfFrameToMessageConverter conv = new WsfRequestConverterImpl();
 		String result = conv.convert(frame);
 
 		String expected = "[fid,123987,\"GRAPHQL-REQUEST\",data]";
@@ -63,7 +61,7 @@ public class TestWsfConverter {
 	public void testWsfConverter_2() {
 		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
 
-		WsfFrameToMessageConverter conv = new WsfConverter(WsfFrameType.GRAPHQLRESPONSE);
+		WsfFrameToMessageConverter conv = new WsfResponseConverterImpl();
 		WsfFrame result = conv.convert(input);
 
 		String fid = "fid";
@@ -75,6 +73,22 @@ public class TestWsfConverter {
 		Assertions.assertTrue(result.getRid().equals(rid));
 		Assertions.assertTrue(result.getType().equals(type));
 		Assertions.assertTrue(result.getData().equals(data));
+	}
+
+	private class WsfRequestConverterImpl extends WsfConverter {
+
+		public WsfRequestConverterImpl() {
+			super(WsfFrameType.GRAPHQLREQUEST);
+		}
+
+	}
+
+	private class WsfResponseConverterImpl extends WsfConverter {
+
+		public WsfResponseConverterImpl() {
+			super(WsfFrameType.GRAPHQLRESPONSE);
+		}
+
 	}
 
 }
