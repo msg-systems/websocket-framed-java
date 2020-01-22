@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "graphqlio.websocketframed",
-      "type": "com.thinkenterprise.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration",
-      "sourceType": "com.thinkenterprise.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration"
+      "type": "com.graphqlio.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration",
+      "sourceType": "com.graphqlio.wsf.autoconfiguration.WsfWebSocketFramedAutoConfiguration"
     },
     {
       "name": "graphqlio.websocketframed",
-      "type": "com.thinkenterprise.wsf.autoconfiguration.WsfWebSocketFramedProperties",
-      "sourceType": "com.thinkenterprise.wsf.autoconfiguration.WsfWebSocketFramedProperties"
+      "type": "com.graphqlio.wsf.autoconfiguration.WsfWebSocketFramedProperties",
+      "sourceType": "com.graphqlio.wsf.autoconfiguration.WsfWebSocketFramedProperties"
     }
   ],
   "properties": [],
