@@ -42,7 +42,7 @@ import com.graphqlio.wsf.domain.WsfFrameType;
 public class TestWsfConverter {
 
 	@Test
-	public void testWsfConverter_1() {
+	public void testWsfConverterRequest() {
 		String fid = "fid";
 		String rid = "123987";
 		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
@@ -58,7 +58,7 @@ public class TestWsfConverter {
 	}
 
 	@Test
-	public void testWsfConverter_2() {
+	public void testWsfConverterResponse() {
 		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
 
 		WsfFrameToMessageConverter conv = new WsfResponseConverterImpl();
