@@ -29,9 +29,6 @@ package com.graphqlio.wsf.codec;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.graphqlio.wsf.codec.WsfCBORCodec;
-import com.graphqlio.wsf.codec.WsfCodec;
-
 /**
  * Class for testing graphqlio class WsfCBORCodec
  *
@@ -42,7 +39,7 @@ import com.graphqlio.wsf.codec.WsfCodec;
 public class WsfCBORCodecTest {
 
 	@Test
-	public void testWsfCBORCodec() throws Exception {
+	public void whenEncodedAndDecodedThenOutputEqualsInput() throws Exception {
 		String data = "this text is for excryption and decryption";
 
 		WsfCodec codec = new WsfCBORCodec();

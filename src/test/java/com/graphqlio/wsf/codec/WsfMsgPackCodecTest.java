@@ -29,9 +29,6 @@ package com.graphqlio.wsf.codec;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.graphqlio.wsf.codec.WsfCodec;
-import com.graphqlio.wsf.codec.WsfMsgPackCodec;
-
 /**
  * Class for testing graphqlio class WsfMsgPackCodec
  *
@@ -42,7 +39,7 @@ import com.graphqlio.wsf.codec.WsfMsgPackCodec;
 public class WsfMsgPackCodecTest {
 
 	@Test
-	public void testWsfMsgPackCodec() throws Exception {
+	public void whenEncodedAndDecodedThenOutputEqualsInput() throws Exception {
 		String data = "this text is for excryption and decryption";
 
 		WsfCodec codec = new WsfMsgPackCodec();

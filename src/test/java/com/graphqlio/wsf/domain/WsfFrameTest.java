@@ -29,9 +29,6 @@ package com.graphqlio.wsf.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.graphqlio.wsf.domain.WsfFrame;
-import com.graphqlio.wsf.domain.WsfFrameType;
-
 /**
  * Class for testing graphqlio classes WsfFrame and WsfFrameType
  *
@@ -42,7 +39,7 @@ import com.graphqlio.wsf.domain.WsfFrameType;
 public final class WsfFrameTest {
 
 	@Test
-	public void testWsfFrame() {
+	public void whenFrame2IsMadeOfFrame1ThenFieldsAreCorrectSet() {
 		String fid = "fid";
 		String rid_1 = "123987";
 		String rid_2 = "123988";
