@@ -39,7 +39,7 @@ import com.graphqlio.wsf.codec.WsfMsgPackCodec;
  * @author Torsten Kühnert
  */
 
-public class TestWsfMsgPackCodec {
+public class WsfMsgPackCodecTest {
 
 	@Test
 	public void testWsfMsgPackCodec() throws Exception {

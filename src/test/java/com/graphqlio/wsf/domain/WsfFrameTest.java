@@ -24,32 +24,57 @@
  * **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * *
  ******************************************************************************/
-package com.graphqlio.wsf.codec;
+package com.graphqlio.wsf.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.graphqlio.wsf.codec.WsfCBORCodec;
-import com.graphqlio.wsf.codec.WsfCodec;
+import com.graphqlio.wsf.domain.WsfFrame;
+import com.graphqlio.wsf.domain.WsfFrameType;
 
 /**
- * Class for testing graphqlio class WsfCBORCodec
+ * Class for testing graphqlio classes WsfFrame and WsfFrameType
  *
  * @author Michael Schäfer
  * @author Torsten Kühnert
  */
 
-public class TestWsfCBORCodec {
+public final class WsfFrameTest {
 
 	@Test
-	public void testWsfCBORCodec() throws Exception {
-		String data = "this text is for excryption and decryption";
+	public void testWsfFrame() {
+		String fid = "fid";
+		String rid_1 = "123987";
+		String rid_2 = "123988";
+		WsfFrameType type = WsfFrameType.GRAPHQLREQUEST;
+		String data = "data";
 
-		WsfCodec codec = new WsfCBORCodec();
-		byte[] bytes = codec.encode(data);
-		String result = codec.decode(bytes);
+		WsfFrame f_1 = WsfFrame.builder().fid(fid).rid(rid_1).type(type).data(data).build();
+		WsfFrame f_2 = WsfFrame.builder().fromRequestMessage(f_1).build();
 
-		Assertions.assertTrue(result.equals(data));
+		Assertions.assertTrue(f_1.getFid().equals(f_2.getFid()));
+
+		// rid's are unequal, rid-2 is rid-1 incremented:
+		Assertions.assertTrue(!f_1.getRid().equals(f_2.getRid()));
+		Assertions.assertTrue(f_1.getRid().equals(rid_1));
+		Assertions.assertTrue(f_2.getRid().equals(rid_2));
+
+		// types are unequal, type-2 is response:
+		Assertions.assertTrue(!f_1.getType().equals(f_2.getType()));
+		Assertions.assertTrue(f_1.getType().equals(WsfFrameType.GRAPHQLREQUEST));
+		Assertions.assertTrue(f_2.getType().equals(WsfFrameType.GRAPHQLRESPONSE));
+
+		// data's are unequal, data-2 is not set (null):
+		Assertions.assertTrue(!f_1.getData().equals(f_2.getData()));
+		Assertions.assertTrue(f_1.getData().equals(data));
+		Assertions.assertTrue(f_2.getData() == null);
+
+		// so over all: f-1 is not equal f-2:
+		Assertions.assertTrue(!f_1.toString().equals(f_2.toString()));
+
+		// this are the expected types:
+		Assertions.assertTrue(f_1.getType().toString().equals("GRAPHQL-REQUEST"));
+		Assertions.assertTrue(f_2.getType().toString().equals("GRAPHQL-RESPONSE"));
 	}
 
 }

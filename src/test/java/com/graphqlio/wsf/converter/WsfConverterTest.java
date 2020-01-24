@@ -39,7 +39,7 @@ import com.graphqlio.wsf.domain.WsfFrameType;
  * @author Torsten Kühnert
  */
 
-public class TestWsfConverter {
+public class WsfConverterTest {
 
 	@Test
 	public void testWsfConverterRequest() {
