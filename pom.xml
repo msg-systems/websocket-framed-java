@@ -100,23 +100,63 @@
                 <version>2.22.2</version>
             </plugin>
 
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-jar-plugin</artifactId>
+		      <version>3.2.0</version>
+		      <configuration>
+		      <!-- 
+		      	Hiermit werden die Samples-Klassen nicht ins jar exportiert.
+		      	Leider werden die Samples-Resources weiterhin exportiert.
+		       -->
+		        <excludes>
+		        	<exclude>**/samples/**/*</exclude>
+		        </excludes>
+		      </configuration>
+		    </plugin>
+
 			<plugin>
 			  <groupId>org.codehaus.mojo</groupId>
 			  <artifactId>build-helper-maven-plugin</artifactId>
-			  <!-- <version>1.7</version> -->
+			  <version>3.0.0</version>
 			  <executions>
-			    <execution>
-			      <!-- <id>add-source</id> -->
-			      <phase>generate-sources</phase>
-			      <goals>
-			        <goal>add-source</goal>
-			      </goals>
-			      <configuration>
-			        <sources>
-			          <source>/src/samples/java/</source>
-			        </sources>
-			      </configuration>
-			    </execution>
+			  <!-- 
+			  	Hiermit werden die Samples-Sourcen in den eclipse-Build-Path aufgenommen.
+			  	(bei Import des Maven-Projekts)
+			   -->
+				  <execution>
+				    <id>add-source</id>
+				    <phase>generate-sources</phase>
+				    <goals>
+				      <goal>add-source</goal>
+				    </goals>
+				    <configuration>
+				      <sources>
+				        <source>src/samples/java</source>
+				      </sources>
+				    </configuration>
+				  </execution>
+			  <!-- 
+			  	Hiermit werden die Samples-Resourcen in den eclipse-Build-Path aufgenommen.
+			  	(bei Import des Maven-Projekts)
+			  	Der targetPath ist dabei nicht ganz klar:
+			  	bei jar-Export werden die Samples-Resourcen an eine 'komische' Stelle kopiert.
+			   -->
+		          <execution>
+		            <id>add-resource</id>
+		            <phase>generate-resources</phase>
+		            <goals>
+		              <goal>add-resource</goal>
+		            </goals>
+		            <configuration>
+		              <resources>
+		                <resource>
+		                  <directory>src/samples/resources</directory>
+		                  <targetPath>src/samples/resources</targetPath>
+		                </resource>
+		              </resources>
+		            </configuration>
+		          </execution>
 			  </executions>
 			</plugin>
 
