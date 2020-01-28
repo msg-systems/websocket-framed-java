@@ -44,37 +44,32 @@ import com.graphqlio.wsf.exception.WsfException;
  * @author Torsten Kühnert
  */
 
-public abstract class WsfConverter implements WsfFrameToMessageConverter {
+public abstract class WsfConverter extends WsfAbstractConverter {
 
 	private final Logger logger = LoggerFactory.getLogger(WsfConverter.class);
-	
-	
-	private WsfFrameType frameType;	
 
 	protected WsfConverter(WsfFrameType frameType) {
 		this.frameType = frameType;
 	}
-	
-		
+
 	@Override
 	public String convert(WsfFrame message) {
-		
-		
-		if(message.getType()!=frameType) {
+
+		if (message.getType() != frameType) {
 			logger.warn(String.format("WsfConverter: Expected type (%s), got type (%s)", frameType, message.getType()));
-/*
-*			not necessary to throw an exception here.
-*			converter is able to handle message type
-* 
-*/
-			//			throw new WsfException();
+			/*
+			 * not necessary to throw an exception here. converter is able to handle message
+			 * type
+			 * 
+			 */
+			// throw new WsfException();
 		}
 
 		// Create frame from message
-		String frame = "[" + message.getFid() + "," + message.getRid() + "," + "\""+ message.getType() + "\"" + "," + message.getData() + "]";
+		String frame = "[" + message.getFid() + "," + message.getRid() + "," + "\"" + message.getType() + "\"" + ","
+				+ message.getData() + "]";
 		return frame;
 	}
-
 
 	@Override
 	public WsfFrame convert(String frame) {
@@ -143,7 +138,7 @@ public abstract class WsfConverter implements WsfFrameToMessageConverter {
 		}
 
 		// Build Message
-		return  WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
+		return WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 	}
 
 }

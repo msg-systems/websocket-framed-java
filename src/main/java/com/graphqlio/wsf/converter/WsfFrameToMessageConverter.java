@@ -38,8 +38,8 @@ import com.graphqlio.wsf.domain.WsfFrame;
 
 public interface WsfFrameToMessageConverter {
 
-	WsfFrame convert(String frame);
+	WsfFrame convert(Object message, String protocol);
 
-	String convert(WsfFrame message);
+	Object convert(WsfFrame frame, String protocol);
 
 }

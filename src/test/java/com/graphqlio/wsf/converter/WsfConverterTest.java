@@ -51,7 +51,7 @@ public class WsfConverterTest {
 		WsfFrame frame = WsfFrame.builder().fid(fid).rid(rid).type(type).data(data).build();
 
 		WsfFrameToMessageConverter conv = new WsfRequestConverterImpl();
-		String result = conv.convert(frame);
+		String result = (String) conv.convert(frame, WsfAbstractConverter.SUB_PROTOCOL_TEXT);
 
 		String expected = "[fid,123987,\"GRAPHQL-REQUEST\",data]";
 		Assertions.assertTrue(result.equals(expected));
@@ -62,7 +62,7 @@ public class WsfConverterTest {
 		String input = "[fid,123987,\"GRAPHQL-RESPONSE\",{\"query\":\"data\"}]";
 
 		WsfFrameToMessageConverter conv = new WsfResponseConverterImpl();
-		WsfFrame result = conv.convert(input);
+		WsfFrame result = conv.convert(input, WsfAbstractConverter.SUB_PROTOCOL_TEXT);
 
 		String fid = "fid";
 		String rid = "123987";

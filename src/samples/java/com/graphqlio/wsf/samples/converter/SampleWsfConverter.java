@@ -26,6 +26,7 @@
  ******************************************************************************/
 package com.graphqlio.wsf.samples.converter;
 
+import com.graphqlio.wsf.converter.WsfAbstractConverter;
 import com.graphqlio.wsf.converter.WsfConverter;
 import com.graphqlio.wsf.converter.WsfFrameToMessageConverter;
 import com.graphqlio.wsf.domain.WsfFrame;
@@ -54,11 +55,11 @@ public class SampleWsfConverter {
 		WsfFrameToMessageConverter conv = new WsfRequestConverterImpl();
 
 		// convert from WsfFrame to String
-		String result = conv.convert(frame_input);
+		String result = (String) conv.convert(frame_input, WsfAbstractConverter.SUB_PROTOCOL_TEXT);
 		System.out.println("result = " + result);
 
 		// convert from String to WsfFrame
-		WsfFrame frame_output = conv.convert(result);
+		WsfFrame frame_output = conv.convert(result, WsfAbstractConverter.SUB_PROTOCOL_TEXT);
 		System.out.println("frame_output = " + frame_output);
 	}
 
