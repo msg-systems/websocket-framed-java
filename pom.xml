@@ -6,8 +6,34 @@
 	<groupId>com.graphqlio</groupId>
 	<artifactId>websocket-framed-java</artifactId>
 	<version>0.0.9</version>
+	<packaging>jar</packaging>
 	<name>WebSocket Framed</name>
-	<description>WebSocket Framed</description>
+
+	<url>http://graphqlio.com</url>
+	<description>
+    websocket-framed-java is the Java implementation of the
+    JavaScript websocket-framed reference implementation.
+    The documentation of the reference implementation can be
+    found at (https://github.com/rse/websocket-framed).
+    The library is part of the graphqlio ecosystem.
+    </description>
+
+	<developers>
+		<developer>
+			<name>Michael Schäfer</name>
+			<email>michael.schaefer@graphqlio.com</email>
+			<url>http://graphqlio.com</url>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+			<comments>See "https://en.wikipedia.org/wiki/MIT_License"</comments>
+		</license>
+	</licenses>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -101,68 +127,105 @@
                 <version>2.22.2</version>
             </plugin>
 
-		    <plugin>
-		      <groupId>org.apache.maven.plugins</groupId>
-		      <artifactId>maven-jar-plugin</artifactId>
-		      <version>3.2.0</version>
-		      <configuration>
-		      <!-- 
-		      	Hiermit werden die Samples-Klassen nicht ins jar exportiert.
-		      	Leider werden die Samples-Resources weiterhin exportiert.
-		       -->
-		        <excludes>
-		        	<exclude>**/samples/**/*</exclude>
-		        </excludes>
-		      </configuration>
-		    </plugin>
-
 			<plugin>
-			  <groupId>org.codehaus.mojo</groupId>
-			  <artifactId>build-helper-maven-plugin</artifactId>
-			  <version>3.0.0</version>
-			  <executions>
-			  <!-- 
-			  	Hiermit werden die Samples-Sourcen in den eclipse-Build-Path aufgenommen.
-			  	(bei Import des Maven-Projekts)
-			   -->
-				  <execution>
-				    <id>add-source</id>
-				    <phase>generate-sources</phase>
-				    <goals>
-				      <goal>add-source</goal>
-				    </goals>
-				    <configuration>
-				      <sources>
-				        <source>src/samples/java</source>
-				      </sources>
-				    </configuration>
-				  </execution>
-			  <!-- 
-			  	Hiermit werden die Samples-Resourcen in den eclipse-Build-Path aufgenommen.
-			  	(bei Import des Maven-Projekts)
-			  	Der targetPath ist dabei nicht ganz klar:
-			  	bei jar-Export werden die Samples-Resourcen an eine 'komische' Stelle kopiert.
-			   -->
-		          <execution>
-		            <id>add-resource</id>
-		            <phase>generate-resources</phase>
-		            <goals>
-		              <goal>add-resource</goal>
-		            </goals>
-		            <configuration>
-		              <resources>
-		                <resource>
-		                  <directory>src/samples/resources</directory>
-		                  <targetPath>src/samples/resources</targetPath>
-		                </resource>
-		              </resources>
-		            </configuration>
-		          </execution>
-			  </executions>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
 			</plugin>
-
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<configLocation>google-checks.xml</configLocation>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>false</failsOnError>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
 		</plugins>
 	</build>
 	
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:git:git@github.com:Thinkenterprise/websocket-framed-java.git</connection>
+		<developerConnection>scm:git:git@github.com:Thinkenterprise/websocket-framed-java.git</developerConnection>
+		<url>https://github.com/Thinkenterprise/websocket-framed-java</url>
+	</scm>
+	
 </project>
