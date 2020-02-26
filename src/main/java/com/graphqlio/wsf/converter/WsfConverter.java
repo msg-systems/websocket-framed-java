@@ -23,11 +23,11 @@
  */
 package com.graphqlio.wsf.converter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import com.graphqlio.wsf.domain.WsfFrame;
 import com.graphqlio.wsf.domain.WsfFrameType;
@@ -111,13 +111,20 @@ public abstract class WsfConverter extends WsfAbstractConverter {
         throw new WsfException();
       }
       try {
-        arr.getInt(1);
-        // keine Exception? dann übernehmen:
-        rid = arr.getString(1);
+        rid = "" + arr.getInt(1);
+        // keine Exception? dann weiter.
         logger.info("rid = " + rid);
 
       } catch (JSONException e) {
-        throw new WsfException();
+        // Exception? dann könnte es ein String sein:
+        try {
+          rid = arr.getString(1);
+          logger.info("rid = " + rid);
+
+        } catch (Exception e2) {
+          // auch kein String? FEHLER:
+          throw new WsfException();
+        }
       }
       try {
         if (!arr.getString(2).equals(graphQLIOMessageType.toString())) {
@@ -130,7 +137,7 @@ public abstract class WsfConverter extends WsfAbstractConverter {
       type = graphQLIOMessageType;
       logger.info("type = " + type);
       try {
-        JSONObject obj = new JSONObject(arr.getString(3));
+        JSONObject obj = arr.getJSONObject(3);
         // keine Exception? dann weiter:
         if (obj.has("query")) {
           data = obj.getString("query");

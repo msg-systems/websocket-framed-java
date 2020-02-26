@@ -58,10 +58,16 @@
 	</dependencyManagement>
 
 	<dependencies>
-	
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>2.0.0-alpha1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>2.0.0-alpha1</version>
+		    <scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -99,11 +105,10 @@
 		    <scope>test</scope>
 		</dependency>
 
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20190722</version>
 		</dependency>
 	</dependencies>
 	
