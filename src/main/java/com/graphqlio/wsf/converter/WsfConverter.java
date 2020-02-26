@@ -104,27 +104,32 @@ public abstract class WsfConverter extends WsfAbstractConverter {
 
     } else {
       try {
-        fid = arr.getString(0);
+        Object obj = arr.get(0);
+        if (obj instanceof String) {
+          fid = (String) obj;
+        } else if (obj instanceof Integer) {
+          fid = "" + (Integer) obj;
+        } else {
+          throw new WsfException();
+        }
         logger.info("fid = " + fid);
 
       } catch (JSONException e) {
         throw new WsfException();
       }
       try {
-        rid = "" + arr.getInt(1);
-        // keine Exception? dann weiter.
+        Object obj = arr.get(1);
+        if (obj instanceof String) {
+          rid = (String) obj;
+        } else if (obj instanceof Integer) {
+          rid = "" + (Integer) obj;
+        } else {
+          throw new WsfException();
+        }
         logger.info("rid = " + rid);
 
       } catch (JSONException e) {
-        // Exception? dann könnte es ein String sein:
-        try {
-          rid = arr.getString(1);
-          logger.info("rid = " + rid);
-
-        } catch (Exception e2) {
-          // auch kein String? FEHLER:
-          throw new WsfException();
-        }
+        throw new WsfException();
       }
       try {
         if (!arr.getString(2).equals(graphQLIOMessageType.toString())) {
