@@ -144,14 +144,27 @@ public abstract class WsfConverter extends WsfAbstractConverter {
       try {
         JSONObject obj = arr.getJSONObject(3);
         // keine Exception? dann weiter:
-        if (obj.has("query")) {
-          data = obj.getString("query");
-          logger.info("data = " + data);
-
-        } else {
-          throw new WsfException();
+        if (graphQLIOMessageType  ==  WsfFrameType.GRAPHQLREQUEST) {
+          if (obj.has("query")) {
+            data = obj.getString("query");
+            logger.info("data = " + data);
+          } else {
+            throw new WsfException();
+          }        	
         }
-
+        else {
+          if (obj.has("query")) {  
+              data = obj.getString("query");
+              logger.info("data = " + data);
+            logger.info("data = " + data);
+          } else if (obj.has("data")) {
+        	  // return full data object as string
+          	data = obj.toString();
+            logger.info("data = " + data);
+          } else {
+            throw new WsfException();
+          }
+        }
       } catch (JSONException e) {
         throw new WsfException();
       }
