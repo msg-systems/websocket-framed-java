@@ -21,20 +21,21 @@
  *
  * <p>****************************************************************************
  */
+
 package com.graphqlio.wsf.converter;
 
+import com.graphqlio.wsf.domain.WsfFrame;
+import com.graphqlio.wsf.domain.WsfFrameType;
+import com.graphqlio.wsf.exception.WsfException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.graphqlio.wsf.domain.WsfFrame;
-import com.graphqlio.wsf.domain.WsfFrameType;
-import com.graphqlio.wsf.exception.WsfException;
 
 /**
- * Class for implementing converters for both directions
+ * Class for implementing converters for both directions.
  *
  * @author Michael Schäfer
  * @author Dr. Edgar Müller
@@ -87,7 +88,7 @@ public abstract class WsfConverter extends WsfAbstractConverter {
     String data;
 
     // Actually we only convert the GRAPHQLREQUEST frame type
-    WsfFrameType graphQLIOMessageType = WsfFrameType.valueOf(frameType.name());
+    WsfFrameType graphQlIoMessageType = WsfFrameType.valueOf(frameType.name());
 
     JSONArray arr = null;
     try {
@@ -132,35 +133,37 @@ public abstract class WsfConverter extends WsfAbstractConverter {
         throw new WsfException();
       }
       try {
-        if (!arr.getString(2).equals(graphQLIOMessageType.toString())) {
+        if (!arr.getString(2).equals(graphQlIoMessageType.toString())) {
           throw new WsfException();
         }
 
       } catch (JSONException e) {
         throw new WsfException();
       }
-      type = graphQLIOMessageType;
+      type = graphQlIoMessageType;
       logger.info("type = " + type);
       try {
         JSONObject obj = arr.getJSONObject(3);
         // keine Exception? dann weiter:
-        if (graphQLIOMessageType  ==  WsfFrameType.GRAPHQLREQUEST) {
+        if (graphQlIoMessageType  ==  WsfFrameType.GRAPHQLREQUEST) {
           if (obj.has("query")) {
             data = obj.getString("query");
             logger.info("data = " + data);
           } else {
             throw new WsfException();
-          }        	
-        }
-        else {
+          }
+        } else {
           if (obj.has("query")) {  
-              data = obj.getString("query");
-              logger.info("data = " + data);
+            data = obj.getString("query");
             logger.info("data = " + data);
           } else if (obj.has("data")) {
-        	  // return full data object as string
-          	data = obj.toString();
+            // return full data object as string
+            data = obj.toString();
             logger.info("data = " + data);
+          } else if (obj.has("errors")) {
+            // return full data object as string
+            data = obj.toString();
+            logger.info("errors = " + data);
           } else {
             throw new WsfException();
           }
